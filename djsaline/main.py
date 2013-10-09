@@ -3,7 +3,7 @@ import pystache
 import os
 import random
 import sys
-from djvasa.templates import View
+from djsaline.templates import View
 
 
 class Project(object):

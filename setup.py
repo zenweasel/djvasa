@@ -24,7 +24,7 @@ setup(
     long_description=open('README.rst').read(),
     author='Chad Gallemore',
     author_email='cgallemore@gmail.com',
-    url='https://github.com/cgallemore/djvasa',
+    url='https://github.com/zenweasel/saline',
     license='MIT',
     keywords='terminal django vagrant saltstack cli',
     classifiers=(
@@ -38,10 +38,10 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development'
     ),
-    packages=['djvasa', 'djvasa.templates'],
-    package_data={'djvasa': ['templates/*.mustache']},
+    packages=['saline', 'djsaline.templates'],
+    package_data={'djsaline': ['templates/*.mustache']},
     entry_points={
-        'console_scripts': ['djvasa = djvasa.main:main'],
+        'console_scripts': ['djsaline = djsaline.main:main'],
     },
     install_requires=[
         "pystache >= 0.5.3",
