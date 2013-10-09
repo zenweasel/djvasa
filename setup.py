@@ -18,12 +18,12 @@ if current_version < (2, 7) or current_version == (3, 1) or (3, 2):
     optional_requirements.append('argparse>=1.2.1')
 
 setup(
-    name='djvasa',
-    version='0.1.1',
-    description='Initialize a new Django project with Vagrant for easy start',
+    name='saline',
+    version='0.0.1',
+    description='Initialize a new Vagrant box based upon your project',
     long_description=open('README.rst').read(),
-    author='Chad Gallemore',
-    author_email='cgallemore@gmail.com',
+    author='Brent Hoover',
+    author_email='brent@hoover.net',
     url='https://github.com/zenweasel/saline',
     license='MIT',
     keywords='terminal django vagrant saltstack cli',
@@ -41,9 +41,9 @@ setup(
     packages=['saline', 'djsaline.templates'],
     package_data={'djsaline': ['templates/*.mustache']},
     entry_points={
-        'console_scripts': ['djsaline = djsaline.main:main'],
+        'console_scripts': ['saline = djsaline.main:main'],
     },
     install_requires=[
-        "pystache >= 0.5.3",
+        "Jinja2 >= 2.7.1",
     ] + optional_requirements,
 )
