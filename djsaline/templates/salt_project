@@ -3,9 +3,9 @@ virtualenv:
         - require:
             - pkg: python-pip
         - require_in:
-            - /home/vagrant/.virtualenv/{{project_name}}
+            - /home/vagrant/virtualenvs/{{project_name}}
 
-/home/vagrant/.virtualenv/{{project_name}}:
+/home/vagrant/virtualenvs/{{project_name}}:
     virtualenv.managed:
         - no-site-packages: True
         - distribute: True

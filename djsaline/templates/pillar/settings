@@ -1,7 +1,7 @@
 postgres.host: 'localhost'
-postgres.port: '5432'
-postgres.user: 'django'
-postgres.pass: 'django'
+postgres.port: '{{dbport}}'
+postgres.user: '{{dbuser}}'
+postgres.pass: '{{dbpass}}'
 postgres.db: '{{project_name}}'
 postgres.runas: 'postgres'
 

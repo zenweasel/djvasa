@@ -1,0 +1,21 @@
+packages:
+    pkg.installed:
+        - names:
+            - python-dev
+            - python-pip
+            - postgresql
+            - libpq-dev
+            - libgeos-c1
+            - libgeos-dev
+            - libgdal1
+            - libgdal1-dev
+            - build-essential
+            - libxml2
+            - libxml2-dev
+            - checkinstall
+            - libreadline-dev
+            - libxslt1-dev
+            - libossp-uuid-dev
+            - gettext
+        - require_in:
+            - /home/vagrant/virtualenvs/{{project_name}}

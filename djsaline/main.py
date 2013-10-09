@@ -1,9 +1,7 @@
 import argparse
-import pystache
+from jinja2 import Environment, PackageLoader
 import os
-import random
 import sys
-from djsaline.templates import View
 
 
 class Project(object):
@@ -11,67 +9,39 @@ class Project(object):
 
     def __init__(self, **kwargs):
         self.project_name = raw_input("What's the name of your project? ")
-        self.heroku = kwargs.get('heroku')
-        self.mysql = kwargs.get('mysql')
-        self.postgres = kwargs.get('postgres') or self.heroku
-        self.hg = kwargs.get('hg')
-        self.git = False if self.hg else True
-        self.full_name = raw_input("What's your full name? ")
-        self.email = raw_input("What's your email? ")
+        self.postgres = True
+        self.git = True
         self.project_path = self.project_root = os.path.join(os.getcwd(), self.project_name)
-        self.renderer = pystache.Renderer()
-        self.view = View(self.project_name, **self._kwargs)
+        self.env = Environment(loader=PackageLoader('djsaline', 'templates'))
 
-    def _create_file(self, names):
-        for file_name, template_name in names:
-            self.view.template_name = template_name
-            with open(os.path.join(self.project_path, file_name), 'w+') as f:
-                f.write(self.renderer.render(self.view))
+    def _create_file(self):
+        template_files = os.listdir(os.path.join(os.getcwd(), 'templates'))
+        for template_file in template_files:
+                template = self.env.get_template(template_file)
+                with open(os.path.join(self.project_root, self.project_name), 'wt') as fd:
+                    fd.write(template.render(self._kwargs))
 
-    @property
-    def secret_key(self):
-        if not self._secret_key:
-            chars = "!@#$%^&*(-_=+)abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            self._secret_key = ''.join(random.choice(chars) for c in range(50))
 
-        return self._secret_key
 
     @property
     def _kwargs(self):
         return {
-            'heroku': self.heroku,
-            'mysql': self.mysql,
             'postgres': self.postgres,
-            'full_name': self.full_name,
-            'email': self.email,
-            'secret_key': self.secret_key
         }
 
     @property
     def root_files(self):
         files = {
-            'manage.py': 'manage',
-            'requirements.txt': 'pip_requirements',
             'Vagrantfile': 'vagrantfile'
         }
 
-        if self.hg:
-            files['.hgignore'] = 'hgignore'
-        else:
-            files['.gitignore'] = 'gitignore'
-
-        if self.heroku:
-            files['Procfile'] = 'procfile'
-
+        files['.gitignore'] = 'gitignore'
         return files.items()
 
     @property
     def django_files(self):
         files = {
-            'settings.py': 'settings',
-            'settingslocal.py': 'settings_local',
-            'urls.py': 'urls',
-            'wsgi.py': 'wsgi'
+            'local_settings.py': 'settings_local',
         }
 
         return files.items()

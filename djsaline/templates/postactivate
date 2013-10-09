@@ -1,0 +1,8 @@
+#!/bin/zsh
+# This hook is run after this virtualenv is activated.
+export DJANGO_SETTINGS_MODULE=local_settings
+export DEBUG=0
+export DB_USER="{{ dbuser }}"
+export DB_PASSWORD="{{ dbpasswd }}"
+export DB_HOST="127.0.0.1"
+export SECRET_KEY="{{ secret_key }}"

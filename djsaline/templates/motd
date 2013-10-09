@@ -1,0 +1,7 @@
+To activate your virtualenv issue the following:
+
+    >>> . ~/virtualenv/{{project_name}}/bin/activate
+
+Your project code is located at the following:
+
+    >>> /vagrant

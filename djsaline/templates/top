@@ -1,0 +1,5 @@
+base:
+  '*':
+    - requirements
+    - postgres
+    - {{project_name}}
